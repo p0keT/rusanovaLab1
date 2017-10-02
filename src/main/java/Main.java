@@ -26,14 +26,19 @@ public class Main {
         ArrayList<String> strMatrix = new ArrayList<String>();
 
         for (int i = 0; i <numberOfNodes ; i++) {
-            System.out.println("Enter "+i+" row of matrix:");
-            strMatrix.add(in.next());
+            for (int j = 0; j < numberOfNodes; j++) {
+
+                System.out.println("Enter " + j + " element of the " + i + " row of matrix:");
+                strMatrix.add(in.next());
+            }
         }
 
         int[][] matrix = new int[numberOfNodes][numberOfNodes];
+        int temp2=0;
         for (int i = 0; i <numberOfNodes ; i++) {
             for (int j = 0; j <numberOfNodes ; j++) {
-                matrix[i][j]=Integer.parseInt(String.valueOf(strMatrix.get(i).charAt(j)));
+                matrix[i][j]=Integer.parseInt(String.valueOf(strMatrix.get(temp2)));
+                temp2++;
             }
         }
 
@@ -68,11 +73,15 @@ public class Main {
             node.addAttribute("layer","1");
 
         }
-
+        int supertemp = 0;
         for (Node node : graph) {
             for (Edge edge : node.getEachEnteringEdge()){
-                if(edge.getNode0().getAttribute("layer").equals(edge.getNode1().getAttribute("layer")))
-                    node.setAttribute("layer",String.valueOf(Integer.parseInt(String.valueOf(node.getAttribute("layer")))+1));
+                int source = Integer.parseInt(String.valueOf(edge.getNode0().getAttribute("layer")));
+                int target = Integer.parseInt(String.valueOf(edge.getNode1().getAttribute("layer")));
+                if(source>=target) {
+                    node.setAttribute("layer", String.valueOf(Integer.parseInt(String.valueOf(edge.getNode0().getAttribute("layer"))) + 1));
+                    supertemp =Integer.parseInt(String.valueOf(edge.getNode0().getAttribute("layer")))+1;
+                }
             }
         }
 
