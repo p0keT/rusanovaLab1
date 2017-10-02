@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dcb25829-76bf-4dcc-9f62-b6eaf82edfeb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rusanovaLab1/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../rusanovaLab1/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rusanovaLab1/src/main/java/Main.java" afterPath="$PROJECT_DIR$/../rusanovaLab1/src/main/java/Main.java" />
-    </list>
+    <list default="true" id="dcb25829-76bf-4dcc-9f62-b6eaf82edfeb" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/../rusanovaLab1/out/" />
     <ignored path="$PROJECT_DIR$/../rusanovaLab1/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -271,12 +268,20 @@
       <workItem from="1506785590747" duration="1575000" />
       <workItem from="1506787300497" duration="8084000" />
       <workItem from="1506864578750" duration="15521000" />
-      <workItem from="1506922782862" duration="2408000" />
+      <workItem from="1506922782862" duration="2436000" />
     </task>
+    <task id="LOCAL-00001" summary="some fix">
+      <created>1506925221103</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1506925221103</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27588000" />
+    <option name="totallyTimeSpent" value="27616000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -315,6 +320,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="some fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="some fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
