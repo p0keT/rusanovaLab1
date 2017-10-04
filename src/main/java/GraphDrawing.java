@@ -43,7 +43,6 @@ public class GraphDrawing extends GraphMatrix{
         int j = -1;
         for (Node node : graph) {
             node.setAttribute("xy",j,Integer.parseInt("-"+String.valueOf(node.getAttribute("layer"))));
-            System.out.println(j+"/"+Integer.parseInt(String.valueOf(node.getAttribute("layer"))));
             j--;
         }
     }

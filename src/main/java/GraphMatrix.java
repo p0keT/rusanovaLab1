@@ -44,8 +44,31 @@ public class GraphMatrix {
 
                 System.out.println("Enter " + j + " element of the " + i + " row of matrix:");
                 strMatrix.add(in.next());
-
-                    int currentWeight = Integer.parseInt(strMatrix.get(strMatrix.size() - 1));
+                try {
+                    if(Integer.parseInt(strMatrix.get(strMatrix.size() - 1))<0) {
+                        System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
+                        strMatrix.remove(strMatrix.size() - 1);
+                        j--;
+                        continue;
+                    }
+                    if(i>0 && j<i && Integer.parseInt(strMatrix.get(strMatrix.size() - 1))!=0){
+                        System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
+                        strMatrix.remove(strMatrix.size() - 1);
+                        j--;
+                        continue;
+                    }
+                    if(i==j && Integer.parseInt(strMatrix.get(strMatrix.size() - 1))==0){
+                        System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
+                        strMatrix.remove(strMatrix.size() - 1);
+                        j--;
+                        continue;
+                    }
+                }catch (NumberFormatException e){
+                    System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
+                    strMatrix.remove(strMatrix.size() - 1);
+                    j--;
+                    continue;
+                }
 
 
             }
@@ -67,13 +90,41 @@ public class GraphMatrix {
         inputNumberOfNodes();
 
         ArrayList<String> strMatrix = new ArrayList<String>();
-
+        matrix = new int[numberOfNodes][numberOfNodes];
         Scanner in = new Scanner(System.in);
         for (int i = 0; i <numberOfNodes ; i++) {
             for (int j = 0; j < numberOfNodes; j++) {
-
                 System.out.println("Enter " + j + " element of the " + i + " row of matrix:");
                 strMatrix.add(in.next());
+                try {
+                    if(Integer.parseInt(strMatrix.get(strMatrix.size() - 1))<0 || Integer.parseInt(strMatrix.get(strMatrix.size() - 1))>1) {
+                        System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
+                        strMatrix.remove(strMatrix.size() - 1);
+                        j--;
+                        continue;
+                    }
+                    if(i==j && Integer.parseInt(strMatrix.get(strMatrix.size() - 1))!=0){
+                        System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
+                        strMatrix.remove(strMatrix.size() - 1);
+                        j--;
+                        continue;
+                    }
+
+
+
+                }catch (NumberFormatException e){
+                    System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
+                    strMatrix.remove(strMatrix.size() - 1);
+                    j--;
+                    continue;
+                }
+                matrix[i][j]=Integer.parseInt(strMatrix.get(strMatrix.size() - 1));
+                if(i>0 && j<i && Integer.parseInt(strMatrix.get(strMatrix.size() - 1))!=matrix[j][i]){
+                    System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
+                    strMatrix.remove(strMatrix.size() - 1);
+                    j--;
+                    continue;
+                }
             }
         }
 
@@ -89,16 +140,30 @@ public class GraphMatrix {
 
     private void inputNumberOfNodes(){
         Scanner in = new Scanner(System.in);
-        do{
-            try {
-                System.out.println("Enter number of nodes:");
-                numberOfNodes = in.nextInt();
-            }catch (InputMismatchException e){
-                System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
-                enterTaskMatrix();
-                return;
-            }
-        }while(numberOfNodes<=0);
+        switch(getGraphType()) {
+            case taskGraph : do {
+                                    try {
+                                        System.out.println("Enter number of nodes:");
+                                        numberOfNodes = in.nextInt();
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
+                                        inputNumberOfNodes();
+                                        return;
+                                    }
+                                } while (numberOfNodes <= 0);
+                                break;
+            case systemGraph : do {
+                                    try {
+                                        System.out.println("Enter number of nodes:");
+                                        numberOfNodes = in.nextInt();
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
+                                        inputNumberOfNodes();
+                                        return;
+                                    }
+                                } while (numberOfNodes <= 0);
+                                    break;
+        }
     }
 
     public int getGraphType() {
