@@ -20,8 +20,7 @@ public class GraphDrawing extends GraphMatrix{
             graph.addNode(String.valueOf(i));
         }
 
-        System.out.println(super.getGraphType());
-        System.out.println(getGraphType());
+
         switch (super.getGraphType()){
             case taskGraph: formTaskGraph();
             break;

@@ -1,8 +1,6 @@
 import org.graphstream.stream.sync.SourceTime;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public class GraphMatrix {
 
@@ -12,6 +10,9 @@ public class GraphMatrix {
     private int graphType;
     private int[][] matrix;
     private int numberOfNodes = 0;
+
+    private Queue<Integer> queue = new LinkedList<Integer>();
+
 
     GraphMatrix(){
 
@@ -136,6 +137,12 @@ public class GraphMatrix {
                 temp2++;
             }
         }
+
+        if(isGraphConnected(matrix,1)==false){
+            System.out.println("!!!ALARM!!! Graph is disconnected. Try again !!!ALARM!!!");
+            enterSystemMatrix();
+            return;
+        }
     }
 
     private void inputNumberOfNodes(){
@@ -185,5 +192,47 @@ public class GraphMatrix {
             System.out.println();
         }
     }
+
+
+
+    private boolean isGraphConnected(int adjacency_matrix[][], int source)
+    {
+        int number_of_nodes = adjacency_matrix[source].length - 1;
+
+        int[] visited = new int[number_of_nodes + 1];
+        int i, element;
+        visited[source] = 1;
+        queue.add(source);
+        while (!queue.isEmpty())
+        {
+            element = queue.remove();
+            i = element;
+            while (i <= number_of_nodes)
+            {
+                if (adjacency_matrix[element][i] == 1 && visited[i] == 0)
+                {
+                    queue.add(i);
+                    visited[i] = 1;
+                }
+                i++;
+            }
+        }
+        boolean connected = false;
+
+        for (int vertex = 1; vertex <= number_of_nodes; vertex++)
+        {
+            if (visited[vertex] == 1)
+            {
+                connected = true;
+            } else
+            {
+                connected = false;
+                break;
+            }
+        }
+
+        return connected;
+    }
+
 
 }
