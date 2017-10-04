@@ -149,27 +149,27 @@ public class GraphMatrix {
         Scanner in = new Scanner(System.in);
         switch(getGraphType()) {
             case taskGraph : do {
-                                    try {
-                                        System.out.println("Enter number of nodes:");
-                                        numberOfNodes = in.nextInt();
-                                    } catch (InputMismatchException e) {
-                                        System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
-                                        inputNumberOfNodes();
-                                        return;
-                                    }
-                                } while (numberOfNodes <= 0);
-                                break;
+                try {
+                    System.out.println("Enter number of nodes:");
+                    numberOfNodes = in.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
+                    inputNumberOfNodes();
+                    return;
+                }
+            } while (numberOfNodes <= 1);
+                break;
             case systemGraph : do {
-                                    try {
-                                        System.out.println("Enter number of nodes:");
-                                        numberOfNodes = in.nextInt();
-                                    } catch (InputMismatchException e) {
-                                        System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
-                                        inputNumberOfNodes();
-                                        return;
-                                    }
-                                } while (numberOfNodes <= 0);
-                                    break;
+                try {
+                    System.out.println("Enter number of nodes:");
+                    numberOfNodes = in.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
+                    inputNumberOfNodes();
+                    return;
+                }
+            } while (numberOfNodes <= 1);
+                break;
         }
     }
 
