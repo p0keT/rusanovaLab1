@@ -9,7 +9,10 @@ public class GraphMatrix {
 
     private int graphType;
     private int[][] matrix;
+
     private int numberOfNodes = 0;
+    private int numberOfEdges = 0;
+    private Stack<Integer> stack = new Stack<Integer>();
 
     private Queue<Integer> queue = new LinkedList<Integer>();
 
@@ -22,13 +25,14 @@ public class GraphMatrix {
                 "2. System graph");
         Scanner in = new Scanner(System.in);
         graphType = in.nextInt();
-
+        System.out.println("Enter number of edges:");
+        numberOfEdges = in.nextInt();
         switch(graphType){
             case taskGraph :
-                enterTaskMatrix();
+                enterTaskMatrixVitalik();
                 break;
             case systemGraph :
-                enterSystemMatrix();
+                enterSystemMatrixVitalik();
                 break;
         }
     }
@@ -86,6 +90,50 @@ public class GraphMatrix {
 
 
     }
+
+    private void enterSystemMatrixVitalik(){
+        inputNumberOfNodes();
+        ArrayList<String> strMatrix = new ArrayList<String>();
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the edges: <to> <from>");
+        int count = 0, to = 0, from = 0;
+        matrix = new int[numberOfNodes][numberOfNodes];
+        while (count < numberOfEdges)
+        {
+            to = in.nextInt();
+            from = in.nextInt();
+
+            matrix[from][to]=1;
+            matrix[to][from]=1;
+            count++;
+        }
+    }
+
+    private void enterTaskMatrixVitalik(){
+        inputNumberOfNodes();
+        ArrayList<String> strMatrix = new ArrayList<String>();
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the edges: <from> <to> <weightOfEdge>");
+        int count = 0, to = 0,weightTo = 0, from = 0,weightOfEdge = 0;
+        matrix = new int[numberOfNodes][numberOfNodes];
+        while (count < numberOfEdges)
+        {
+            from = in.nextInt();
+            to = in.nextInt();
+            weightOfEdge = in.nextInt();
+
+
+            matrix[from][to]=weightOfEdge;
+            count++;
+        }
+        System.out.println("Enter weights of nodes: <weightOfNodes>");
+        count = 0;
+        while (count < numberOfNodes)
+        {
+            matrix[count][count]=in.nextInt();
+            count++;
+        }
+    }
     private void enterSystemMatrix(){
 
         inputNumberOfNodes();
@@ -138,7 +186,7 @@ public class GraphMatrix {
             }
         }
 
-        if(isGraphConnected(matrix,1)==false){
+        if(isGraphConnected(matrix,0)==false){
             System.out.println("!!!ALARM!!! Graph is disconnected. Try again !!!ALARM!!!");
             enterSystemMatrix();
             return;
@@ -194,44 +242,40 @@ public class GraphMatrix {
     }
 
 
-
-    private boolean isGraphConnected(int adjacency_matrix[][], int source)
-    {
+    private boolean isGraphConnected(int adjacency_matrix[][], int source){
         int number_of_nodes = adjacency_matrix[source].length - 1;
-
         int[] visited = new int[number_of_nodes + 1];
         int i, element;
         visited[source] = 1;
-        queue.add(source);
-        while (!queue.isEmpty())
+        stack.push(source);
+        while (!stack.isEmpty())
         {
-            element = queue.remove();
-            i = element;
+            element = stack.pop();
+            i = 1;// element;
             while (i <= number_of_nodes)
             {
                 if (adjacency_matrix[element][i] == 1 && visited[i] == 0)
                 {
-                    queue.add(i);
+                    stack.push(i);
                     visited[i] = 1;
                 }
                 i++;
             }
         }
-        boolean connected = false;
 
-        for (int vertex = 1; vertex <= number_of_nodes; vertex++)
-        {
-            if (visited[vertex] == 1)
+        System.out.print("The source node " + source + " is connected to: ");
+        int count = 0;
+        for (int v = 1; v <= number_of_nodes; v++)
+            if (visited[v] == 1)
             {
-                connected = true;
-            } else
-            {
-                connected = false;
-                break;
+                System.out.print(v + " ");
+                count++;
             }
-        }
-
-        return connected;
+        System.out.println();
+        if (count == number_of_nodes)
+            return true;
+        else
+            return false;
     }
 
 
