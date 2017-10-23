@@ -92,20 +92,43 @@ public class GraphMatrix {
     }
 
     private void enterSystemMatrixVitalik(){
+
         inputNumberOfNodes();
         ArrayList<String> strMatrix = new ArrayList<String>();
         Scanner in = new Scanner(System.in);
         System.out.println("Enter the edges: <to> <from>");
         int count = 0, to = 0, from = 0;
         matrix = new int[numberOfNodes][numberOfNodes];
+        ArrayList<Integer> fromPoints =new ArrayList<Integer>();
+        ArrayList<Integer> toPoints =new ArrayList<Integer>();
         while (count < numberOfEdges)
         {
+            boolean theSameInput = false;
             to = in.nextInt();
             from = in.nextInt();
+            if(to==from || to>numberOfNodes-1 || from>numberOfNodes-1 || to<0 || from <0){
+                System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
+                continue;
+            }
+            for (int i = 0; i <fromPoints.size() ; i++) {
+                if((fromPoints.get(i)==from && toPoints.get(i)==to) || (fromPoints.get(i)==to && toPoints.get(i)==from)){
+                    System.out.println("!!!ALARM!!! Your input already exist !!!ALARM!!!");
+                    theSameInput = true;
+                }
+            }
+            if(theSameInput==false) {
+                matrix[from][to] = 1;
+                fromPoints.add(from);
 
-            matrix[from][to]=1;
-            matrix[to][from]=1;
-            count++;
+                matrix[to][from] = 1;
+                toPoints.add(to);
+                count++;
+            }
+        }
+        if(isGraphConnected(matrix,0)==false){
+            System.out.println("!!!ALARM!!! Graph is disconnected. Try again !!!ALARM!!!");
+            enterSystemMatrixVitalik();
+            return;
         }
     }
 
@@ -115,22 +138,49 @@ public class GraphMatrix {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter the edges: <from> <to> <weightOfEdge>");
         int count = 0, to = 0,weightTo = 0, from = 0,weightOfEdge = 0;
+
+        ArrayList<Integer> fromPoints =new ArrayList<Integer>();
+        ArrayList<Integer> toPoints =new ArrayList<Integer>();
         matrix = new int[numberOfNodes][numberOfNodes];
         while (count < numberOfEdges)
         {
+            boolean theSameInput = false;
+
             from = in.nextInt();
             to = in.nextInt();
             weightOfEdge = in.nextInt();
+            if(to<=from || to>numberOfNodes-1 || from>numberOfNodes-1 || to<0 || from <0){
+                System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
+                continue;
+            }
 
+            if(weightOfEdge<1) {
+                System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
+                continue;
+            }
 
-            matrix[from][to]=weightOfEdge;
-            count++;
+            for (int i = 0; i <fromPoints.size() ; i++) {
+                if((fromPoints.get(i)==from && toPoints.get(i)==to)){
+                    System.out.println("!!!ALARM!!! Your input already exist !!!ALARM!!!");
+                    theSameInput = true;
+                }
+            }
+            if(theSameInput==false) {
+                matrix[from][to] = weightOfEdge;
+                fromPoints.add(from);
+                toPoints.add(to);
+                count++;
+            }
         }
         System.out.println("Enter weights of nodes: <weightOfNodes>");
         count = 0;
         while (count < numberOfNodes)
         {
             matrix[count][count]=in.nextInt();
+            if(matrix[count][count]<1) {
+                System.out.println("!!!ALARM!!! Wrong input !!!ALARM!!!");
+                continue;
+            }
             count++;
         }
     }

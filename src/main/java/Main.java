@@ -6,6 +6,8 @@ public class Main {
         graphDrawing.outputMatrix();
         graphDrawing.formGraph();
         graphDrawing.drawGraph(false);
+        graphDrawing.getCriticalPath();
+        graphDrawing.getMaxEdges();
 
 
     }
