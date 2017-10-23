@@ -119,7 +119,7 @@ public class GraphDrawing extends GraphMatrix{
             //System.out.println();
         }
         System.out.println(criticalPaths);
-        //sortingOutput();
+        sortingOutput();
     }
     public void graphRecursion(int i, ArrayList<Integer> listOfNodePathes){
         for (Edge e : graph.getNode(String.valueOf(i)).getEachLeavingEdge()) {
@@ -136,44 +136,22 @@ public class GraphDrawing extends GraphMatrix{
             listOfNodePathes.add(0);
             //System.out.println(listOfNodePathes);
         }
-        //System.out.print("+");
+//        System.out.print("+");
 
     }
-//
-//    private void sortingOutput(){
-//        HashMap<Integer,Integer> mapToSort = new HashMap<Integer, Integer>();
-//        for (int i = 0; i <criticalPaths.size() ; i++) {
-//            mapToSort.put(i, criticalPaths.get(i));
-//        }
-//        mapToSort = (HashMap<Integer, Integer>) sortByValueAscending(mapToSort);
-//
-//        System.out.println("Sorting by ascending order:");
-//        for (Map.Entry<Integer, Integer> entry : mapToSort.entrySet()) {
-//            System.out.println(entry.getKey()
-//                    + "(" + entry.getValue()+")");
-//        }
-//        System.out.println();
-//        System.out.println("Sort by descending order:");
-//        mapToSort = (HashMap<Integer, Integer>) sortByValueDescending(mapToSort);
-//
-//        for (Map.Entry<Integer, Integer> entry : mapToSort.entrySet()) {
-//            System.out.println(entry.getKey()
-//                    + "(" + entry.getValue()+")");
-//        }
-//    }
 
-    ArrayList<Integer> numberNodeEdges = new ArrayList<Integer>();
-    public void getMaxEdges(){
-        for (Node node:graph.getEachNode()
-             ) {
-            numberNodeEdges.add(node.getLeavingEdgeSet().size());
-        }
-//        System.out.println(numberNodeEdges);
+    private void sortingOutput(){
         HashMap<Integer,Integer> mapToSort = new HashMap<Integer, Integer>();
-        for (int i = 0; i < numberNodeEdges.size() ; i++) {
-            mapToSort.put(i, numberNodeEdges.get(i));
+        for (int i = 0; i <criticalPaths.size() ; i++) {
+            mapToSort.put(i, criticalPaths.get(i));
         }
+        mapToSort = (HashMap<Integer, Integer>) sortByValueAscending(mapToSort);
 
+        System.out.println("Sorting by ascending order:");
+        for (Map.Entry<Integer, Integer> entry : mapToSort.entrySet()) {
+            System.out.println(entry.getKey()
+                    + "(" + entry.getValue()+")");
+        }
         System.out.println();
         System.out.println("Sort by descending order:");
         mapToSort = (HashMap<Integer, Integer>) sortByValueDescending(mapToSort);
@@ -183,6 +161,28 @@ public class GraphDrawing extends GraphMatrix{
                     + "(" + entry.getValue()+")");
         }
     }
+
+//    ArrayList<Integer> numberNodeEdges = new ArrayList<Integer>();
+//    public void getMaxEdges(){
+//        for (Node node:graph.getEachNode()
+//             ) {
+//            numberNodeEdges.add(node.getLeavingEdgeSet().size());
+//        }
+////        System.out.println(numberNodeEdges);
+//        HashMap<Integer,Integer> mapToSort = new HashMap<Integer, Integer>();
+//        for (int i = 0; i < numberNodeEdges.size() ; i++) {
+//            mapToSort.put(i, numberNodeEdges.get(i));
+//        }
+//
+//        System.out.println();
+//        System.out.println("Sort by descending order:");
+//        mapToSort = (HashMap<Integer, Integer>) sortByValueDescending(mapToSort);
+//
+//        for (Map.Entry<Integer, Integer> entry : mapToSort.entrySet()) {
+//            System.out.println(entry.getKey()
+//                    + "(" + entry.getValue()+")");
+//        }
+//    }
 
     public static Map<Integer, Integer> sortByValueDescending(Map<Integer, Integer> map) {
         List list = new LinkedList(map.entrySet());

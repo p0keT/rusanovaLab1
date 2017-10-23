@@ -7,7 +7,6 @@ public class Main {
         graphDrawing.formGraph();
         graphDrawing.drawGraph(false);
         graphDrawing.getCriticalPath();
-        graphDrawing.getMaxEdges();
 
 
     }
