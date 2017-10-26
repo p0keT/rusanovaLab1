@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="dcb25829-76bf-4dcc-9f62-b6eaf82edfeb" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/GraphDrawing.java" afterPath="$PROJECT_DIR$/src/main/java/GraphDrawing.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -383,11 +382,18 @@
       <option name="project" value="LOCAL" />
       <updated>1508603004915</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="hyun9">
+      <created>1509050718662</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1509050718662</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79775000" />
+    <option name="totallyTimeSpent" value="79792000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -452,7 +458,8 @@
     <MESSAGE value="some fix" />
     <MESSAGE value="code refactor" />
     <MESSAGE value="vitalik variant of rusanova" />
-    <option name="LAST_COMMIT_MESSAGE" value="vitalik variant of rusanova" />
+    <MESSAGE value="hyun9" />
+    <option name="LAST_COMMIT_MESSAGE" value="hyun9" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
