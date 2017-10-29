@@ -102,24 +102,37 @@ public class GraphDrawing extends GraphMatrix{
 
 
     ArrayList<Integer> criticalPaths = new ArrayList<Integer>();
+    ArrayList<Integer> criticalRevercePaths = new ArrayList<Integer>();
 
     public void getCriticalPath(){
 
         for (int i = 1; i <= getNumberOfNodes() ; i++) {
             ArrayList<Integer> listOfNodePathes = new ArrayList<Integer>();
+            ArrayList<Integer> listOfRevercePaths = new ArrayList<Integer>();
             listOfNodePathes.add(0);
+            listOfRevercePaths.add(0);
             //System.out.print(i+": ");
+            reverceGraphRecursion(i,listOfRevercePaths);
             graphRecursion(i, listOfNodePathes);
             int max = listOfNodePathes.get(0);
             for (int j = 0; j <listOfNodePathes.size() ; j++) {
                 if(listOfNodePathes.get(j)>max)
                     max=listOfNodePathes.get(j);
             }
+
+            int max2 = listOfRevercePaths.get(0);
+            for (int j = 0; j <listOfRevercePaths.size() ; j++) {
+                if(listOfRevercePaths.get(j)>max2)
+                    max2=listOfRevercePaths.get(j);
+            }
             criticalPaths.add(max);
+            criticalRevercePaths.add(max2);
             //System.out.println();
         }
         System.out.println(criticalPaths);
+        System.out.println(criticalRevercePaths);
         sortingOutput();
+
     }
     public void graphRecursion(int i, ArrayList<Integer> listOfNodePathes){
         for (Edge e : graph.getNode(String.valueOf(i)).getEachLeavingEdge()) {
@@ -139,50 +152,50 @@ public class GraphDrawing extends GraphMatrix{
 //        System.out.print("+");
 
     }
+    public void reverceGraphRecursion(int i, ArrayList<Integer> listOfRevercePaths){
+        for (Edge e : graph.getNode(String.valueOf(i)).getEachEnteringEdge()) {
+            int id = Integer.parseInt(e.getNode0().getId());
+            //System.out.print(id + "/");
+            listOfRevercePaths.set(listOfRevercePaths.size()-1,
+                    listOfRevercePaths.get(listOfRevercePaths.size()-1)+super.getMatrix()[id-1][id-1]);
+            reverceGraphRecursion(id, listOfRevercePaths);
+
+        }
+        if(graph.getNode(String.valueOf(i)).getEnteringEdgeSet().isEmpty()){
+            listOfRevercePaths.add(0);
+            //System.out.println(listOfNodePathes);
+        }
+//        System.out.print("+");
+
+    }
 
     private void sortingOutput(){
-        HashMap<Integer,Integer> mapToSort = new HashMap<Integer, Integer>();
-        for (int i = 0; i <criticalPaths.size() ; i++) {
-            mapToSort.put(i, criticalPaths.get(i));
+        HashMap<Integer,Integer> mapToSort16 = new HashMap<Integer, Integer>();
+        for (int i = 0; i <criticalRevercePaths.size() ; i++) {
+            mapToSort16.put(i, criticalRevercePaths.get(i));
         }
-        mapToSort = (HashMap<Integer, Integer>) sortByValueAscending(mapToSort);
+        mapToSort16 = (HashMap<Integer, Integer>) sortByValueAscending(mapToSort16);
 
         System.out.println("Sorting by ascending order:");
-        for (Map.Entry<Integer, Integer> entry : mapToSort.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : mapToSort16.entrySet()) {
             System.out.println(entry.getKey()
                     + "(" + entry.getValue()+")");
         }
+        HashMap<Integer,Integer> mapToSort3 = new HashMap<Integer, Integer>();
+        for (int i = 0; i <criticalPaths.size() ; i++) {
+            mapToSort3.put(i, criticalPaths.get(i));
+        }
         System.out.println();
         System.out.println("Sort by descending order:");
-        mapToSort = (HashMap<Integer, Integer>) sortByValueDescending(mapToSort);
+        mapToSort3 = (HashMap<Integer, Integer>) sortByValueDescending(mapToSort3);
 
-        for (Map.Entry<Integer, Integer> entry : mapToSort.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : mapToSort3.entrySet()) {
             System.out.println(entry.getKey()
                     + "(" + entry.getValue()+")");
         }
     }
 
-//    ArrayList<Integer> numberNodeEdges = new ArrayList<Integer>();
-//    public void getMaxEdges(){
-//        for (Node node:graph.getEachNode()
-//             ) {
-//            numberNodeEdges.add(node.getLeavingEdgeSet().size());
-//        }
-////        System.out.println(numberNodeEdges);
-//        HashMap<Integer,Integer> mapToSort = new HashMap<Integer, Integer>();
-//        for (int i = 0; i < numberNodeEdges.size() ; i++) {
-//            mapToSort.put(i, numberNodeEdges.get(i));
-//        }
-//
-//        System.out.println();
-//        System.out.println("Sort by descending order:");
-//        mapToSort = (HashMap<Integer, Integer>) sortByValueDescending(mapToSort);
-//
-//        for (Map.Entry<Integer, Integer> entry : mapToSort.entrySet()) {
-//            System.out.println(entry.getKey()
-//                    + "(" + entry.getValue()+")");
-//        }
-//    }
+
 
     public static Map<Integer, Integer> sortByValueDescending(Map<Integer, Integer> map) {
         List list = new LinkedList(map.entrySet());

@@ -29,10 +29,10 @@ public class GraphMatrix {
         numberOfEdges = in.nextInt();
         switch(graphType){
             case taskGraph :
-                enterTaskMatrixVitalik();
+                enterTaskMatrix();
                 break;
             case systemGraph :
-                enterSystemMatrixVitalik();
+                enterSystemMatrix();
                 break;
         }
     }
